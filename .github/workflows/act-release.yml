@@ -48,7 +48,7 @@ jobs:
           echo "netbox_pdb_name=NetBox.${{ matrix.platform }}.${{ env.version }}.pdb.7z" >> $GITHUB_ENV
 
       - name: Add C++ build tools to PATH
-        uses: deep-soft/msvc-dev-cmd@v1
+        uses: deep-soft/msvc-dev-cmd@v1.12.1
         with:
           arch: ${{ matrix.arch }}
 
