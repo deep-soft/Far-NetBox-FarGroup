@@ -70,8 +70,10 @@ jobs:
       - name: pack plugin
         shell: bash
         run: |
-          cp LICENSE.txt README.md README.RU.md README.PL.md ./Far3_${{ matrix.platform }}/Plugins/NetBox/
-          7z a -m0=LZMA -mf=BCJ2 -mx9 ${{ env.netbox_name }} ./Far3_${{ matrix.platform }}/Plugins/* -xr!*.pdb
+          #cp LICENSE.txt README.md README.RU.md README.PL.md ./Far3_${{ matrix.platform }}/Plugins/NetBox/
+          cp LICENSE.txt README.md ./Far3_${{ matrix.platform }}/Plugins/NetBox/
+          7z a -m0=LZMA -mf=BCJ2 -mx9 ${{ env.netbox_name }} ./Far3_${{ matrix.platform }}/Plugins/* -xr!*.pdb \
+            -xr!NetBox.map -xr!NetBoxPol.lng -xr!NetBoxRus.lng -xr!NetBoxSpa.lng -xr!README.PL.md -xr!README.RU.md
           7z a -m0=LZMA -mf=off -mx9 ${{ env.netbox_pdb_name }} ./Far3_${{ matrix.platform }}/Plugins/NetBox/NetBox.pdb
 
       - name: Upload result
@@ -107,4 +109,6 @@ jobs:
         shell: bash
         run: gh release create v${{ env.version }} -t "v${{ env.version }}" -n "NetBox ${{ env.version }}" ./*.7z
         env:
-          GITHUB_TOKEN: ${{secrets.PACKAGES_GITHUB_TOKEN}}
+          # GITHUB_TOKEN: ${{secrets.PACKAGES_GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{github.token}
+          
