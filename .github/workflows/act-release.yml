@@ -110,5 +110,5 @@ jobs:
         run: gh release create v${{ env.version }} -t "v${{ env.version }}" -n "NetBox ${{ env.version }}" ./*.7z
         env:
           # GITHUB_TOKEN: ${{secrets.PACKAGES_GITHUB_TOKEN}}
-          GITHUB_TOKEN: ${{github.token}
+          GITHUB_TOKEN: ${{github.token}}
           
