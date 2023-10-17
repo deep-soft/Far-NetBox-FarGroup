@@ -1,4 +1,4 @@
-#2023-10-11 20:00
+#2023-10-17 08:30
 name: act-Release
 
 on:
@@ -142,7 +142,7 @@ jobs:
         continue-on-error: false
         shell: bash
         run: |
-          rm *pdb.7z
+          rm *pdb.7z; op_result=$?
           mv NetBox.x64*.7z NetBox.x64.7z
           mv NetBox.x86*.7z NetBox.x86.7z
           mv NetBox.ARM64*.7z NetBox.ARM64.7z
@@ -162,3 +162,4 @@ jobs:
         shell: bash
         run: |
           rm ./*.7z; op_result=$?
+          rm ./*.zip; op_result=$?
