@@ -62,7 +62,7 @@ jobs:
             cache-${{ matrix.arch }}
 
       - name: Cleanup
-        continue-on-error: false
+        continue-on-error: true
         shell: bash
         run: |
           rm ./*.7z; op_result=$?
@@ -129,7 +129,7 @@ jobs:
 #          GITHUB_TOKEN: ${{github.token}}
           
       - name: Publish Release
-        continue-on-error: false
+        continue-on-error: true
         uses: deep-soft/action-gh-release@v1
         with:
           draft: false
@@ -158,8 +158,10 @@ jobs:
             ./*.7z
 
       - name: Cleanup
-        continue-on-error: false
+        continue-on-error: true
         shell: bash
         run: |
-          rm ./*.7z; op_result=$?
-          rm ./*.zip; op_result=$?
+          #rm ./*.7z; op_result=$?
+          #rm ./*.zip; op_result=$?
+          rm ./*.7z || true;
+          rm ./*.zip || true;
