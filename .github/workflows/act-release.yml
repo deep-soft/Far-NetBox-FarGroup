@@ -65,7 +65,7 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          rm ./*.7z; op_result=$?
+          rm ./*.7z || true;
 
       - name: Create Build folder
         run: cmake -E make_directory build
@@ -114,6 +114,7 @@ jobs:
           export VERSION_PATCH=$(grep "NETBOX_VERSION_PATCH" src/NetBox/plugin_version.hpp | sed -e "s/^.* NETBOX_VERSION_PATCH\s*\([0-9]\+\)/\1/g")
           export VERSION_BUILD=$(grep "NETBOX_VERSION_BUILD" src/NetBox/plugin_version.hpp | sed -e "s/^.* NETBOX_VERSION_BUILD\s*\([0-9]\+\)/\1/g")
           echo "version=$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH.$VERSION_BUILD.$GITHUB_RUN_NUMBER"
+          echo "VERSION=$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH.$VERSION_BUILD.$GITHUB_RUN_NUMBER">> $GITHUB_OUTPUT
           echo "VERSION=$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH.$VERSION_BUILD.$GITHUB_RUN_NUMBER">> $GITHUB_ENV
 
       - name: Download result
@@ -142,7 +143,7 @@ jobs:
         continue-on-error: false
         shell: bash
         run: |
-          rm *pdb.7z; op_result=$?
+          rm *pdb.7z || true;
           mv NetBox.x64*.7z NetBox.x64.7z
           mv NetBox.x86*.7z NetBox.x86.7z
           mv NetBox.ARM64*.7z NetBox.ARM64.7z
@@ -161,7 +162,5 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          #rm ./*.7z; op_result=$?
-          #rm ./*.zip; op_result=$?
           rm ./*.7z || true;
           rm ./*.zip || true;
