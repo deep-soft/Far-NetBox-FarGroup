@@ -147,6 +147,7 @@ jobs:
           mv NetBox.x64*.7z NetBox.x64.7z
           mv NetBox.x86*.7z NetBox.x86.7z
           mv NetBox.ARM64*.7z NetBox.ARM64.7z
+          echo "${{ env.version }}" > FarNetBox-latest.txt
 
       - name: Publish latest Release
         continue-on-error: false
@@ -157,6 +158,7 @@ jobs:
           body: "Far NetBox latest: v${{ env.version }}"
           files: |
             ./*.7z
+            FarNetBox-latest.txt
 
       - name: Cleanup
         continue-on-error: true
